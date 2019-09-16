@@ -48,7 +48,7 @@ func ConfigMock(port string) {
 	os.Setenv("TIMEOUT_REGISTER", "30")
 	os.Setenv("TIMEOUT_TOKEN", "20")
 	os.Setenv("TIMEOUT_DEFAULT", "50")
-	config.Install(true, true, true)
+	config.Install(true, true, false)
 }
 
 func configFlags(devMode, mockMode, disableLog bool) {
