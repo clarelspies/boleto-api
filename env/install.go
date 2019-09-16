@@ -55,7 +55,7 @@ func configFlags(devMode, mockMode, disableLog bool) {
 	if devMode {
 		os.Setenv("INFLUXDB_HOST", "http://localhost")
 		os.Setenv("INFLUXDB_PORT", "8086")
-		os.Setenv("PDF_API", "http://localhost:7070/topdf")
+		//os.Setenv("PDF_API", "http://localhost:7070/topdf")
 		os.Setenv("API_PORT", "3000")
 		os.Setenv("API_VERSION", "0.0.1")
 		os.Setenv("ENVIRONMENT", "Development")
@@ -69,7 +69,7 @@ func configFlags(devMode, mockMode, disableLog bool) {
 		os.Setenv("URL_CAIXA", "https://des.barramento.caixa.gov.br/sibar/ManutencaoCobrancaBancaria/Boleto/Externo")
 		os.Setenv("URL_CITI", "https://citigroupsoauat.citigroup.com/comercioeletronico/registerboleto/RegisterBoletoSOAP")
 		os.Setenv("URL_CITI_BOLETO", "https://ebillpayer.uat.brazil.citigroup.com/ebillpayer/jspInformaDadosConsulta.jsp")
-		os.Setenv("APP_URL", "http://localhost:3000/boleto")
+		//os.Setenv("APP_URL", "http://localhost:3000/boleto")
 		os.Setenv("ELASTIC_URL", "http://localhost:9200")
 		/*os.Setenv("MONGODB_URL", "localhost:27017")
 		os.Setenv("MONGODB_USER", "")
