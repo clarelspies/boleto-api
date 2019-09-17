@@ -18,7 +18,7 @@ type MongoDb struct {
 	m sync.RWMutex
 }
 
-var dbName = "Boleto"
+const dbName = "Boleto_Stress"
 
 var (
 	dbSession *mgo.Session
@@ -47,7 +47,7 @@ func getInfo() *mgo.DialInfo {
 	return &mgo.DialInfo{
 		Addrs:     connMgo,
 		Timeout:   5 * time.Second,
-		Database:  "Boleto",
+		Database:  dbName,
 		PoolLimit: 512,
 		Username:  config.Get().MongoUser,
 		Password:  config.Get().MongoPassword,
