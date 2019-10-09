@@ -100,6 +100,15 @@ func configFlags(devMode, mockMode, disableLog bool) {
 		os.Setenv("URL_PEFISA_TOKEN", "https://psdo-hom.pernambucanas.com.br:444/sdcobr/api/oauth/token")
 		os.Setenv("URL_PEFISA_REGISTER", "https://psdo-hom.pernambucanas.com.br:444/sdcobr/api/v2/titulos")
 		os.Setenv("ENABLE_METRICS", "true")
+		os.Setenv("AZURE_TENANT_ID", "")
+		os.Setenv("AZURE_CLIENT_ID", "")
+		os.Setenv("AZURE_CLIENT_SECRET", "")
+		os.Setenv("VAULT_NAME", "")
+		os.Setenv("CERTIFICATE_ICP_NAME", "yourCertificateICP")
+		os.Setenv("PSW_CERTIFICATE_ICP_NAME", "yourPass")
+		os.Setenv("CERTIFICATE_SSL_NAME", "yourCertificateSSL")
+		os.Setenv("PSW_CERTIFICATE_SSL_NAME", "yourPass")
+		os.Setenv("ENABLE_FILESERVER_CERTIFICATE", "true")
 	}
 	config.Install(mockMode, devMode, disableLog)
 }
