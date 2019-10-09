@@ -27,7 +27,7 @@ func (r *Redis) openConnection() error {
 	dbID, _ := strconv.Atoi(config.Get().RedisDatabase)
 	o := redis.DialDatabase(dbID)
 	ps := redis.DialPassword(config.Get().RedisPassword)
-	tOut := redis.DialConnectTimeout(15 * time.Second)
+	tOut := redis.DialConnectTimeout(5 * time.Second)
 	userTLS := redis.DialUseTLS(config.Get().RedisSSL)
 
 	c, err := redis.Dial("tcp", config.Get().RedisURL, o, ps, tOut, userTLS)
