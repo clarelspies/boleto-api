@@ -60,7 +60,6 @@ func installCertificates() {
 	l := log.CreateLog()
 	var err error
 
-	time.Sleep(1 * time.Minute)
 	if config.Get().MockMode == false && config.Get().EnableFileServerCertificate == false {
 		err = certificate.InstanceStoreCertificatesFromAzureVault(config.Get().VaultName, config.Get().CertificateICPName, config.Get().CertificateSSLName)
 		fmt.Println("Fim: " + time.Now().String())

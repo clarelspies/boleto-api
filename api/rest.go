@@ -13,6 +13,8 @@ import (
 	"github.com/mundipagg/boleto-api/models"
 )
 
+var t = time.Now()
+
 //InstallRestAPI "instala" e sobe o servico de rest
 func InstallRestAPI() {
 	gin.SetMode(gin.ReleaseMode)
@@ -41,7 +43,7 @@ func confirmation(c *gin.Context) {
 	if dump, err := httputil.DumpRequest(c.Request, true); err == nil {
 		l := log.CreateLog()
 		l.BankName = "BradescoShopFacil"
-		l.Operation = "BoletoConfirmation: " + time.Now().String()
+		l.Operation = "BoletoConfirmation: " + t.String()
 		l.Request(string(dump), c.Request.URL.String(), nil)
 	}
 	c.String(200, "OK")
