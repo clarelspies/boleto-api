@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 	"net/http/httputil"
+	"time"
 
 	"github.com/mundipagg/boleto-api/metrics"
 
@@ -40,7 +41,7 @@ func confirmation(c *gin.Context) {
 	if dump, err := httputil.DumpRequest(c.Request, true); err == nil {
 		l := log.CreateLog()
 		l.BankName = "BradescoShopFacil"
-		l.Operation = "BoletoConfirmation"
+		l.Operation = "BoletoConfirmation: " + time.Now().String()
 		l.Request(string(dump), c.Request.URL.String(), nil)
 	}
 	c.String(200, "OK")

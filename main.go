@@ -9,6 +9,7 @@ import (
 	"runtime"
 	"strconv"
 	"syscall"
+	"time"
 
 	"github.com/mundipagg/boleto-api/app"
 	"github.com/mundipagg/boleto-api/config"
@@ -50,6 +51,7 @@ func createPIDfile() {
 }
 
 func main() {
+	fmt.Println("Inicio: " + time.Now().String())
 	flag.Parse()
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	if *mockOnly {
