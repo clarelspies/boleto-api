@@ -16,15 +16,8 @@ func Duration(callback func()) (duration time.Duration) {
 }
 
 func BrNow() time.Time {
-	z, err := time.LoadLocation("America/Sao_Paulo")
-	if err != nil {
-		lg := log.CreateLog()
-		lg.Warn(err.Error(), "Could not get Timezone")
-		return time.Now()
-	}
-	t := time.Now()
-	local := t.In(z)
-	return local
+	time.FixedZone("America/Sao_Paulo", -3)
+	return time.Now()
 }
 
 func NycNow() time.Time {

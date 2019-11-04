@@ -10,6 +10,8 @@ import (
 	"strconv"
 	"syscall"
 
+	"github.com/mundipagg/boleto-api/util"
+
 	"github.com/mundipagg/boleto-api/app"
 	"github.com/mundipagg/boleto-api/config"
 	"github.com/mundipagg/boleto-api/log"
@@ -95,4 +97,6 @@ $$$$$$$  |\$$$$$$  |$$ |\$$$$$$$\  \$$$$  |\$$$$$$  |$$ |  $$ |$$$$$$$  |$$ |
 	fmt.Println("Version: " + config.Get().Version)
 	fmt.Println("DevMode: " + env)
 	fmt.Println("RecoveryRobot Enabled: " + config.Get().RecoveryRobotExecutionEnabled)
+	fmt.Println("São Paulo: ", util.BrNow().String())
+	fmt.Println("New York: ", util.NycNow().String())
 }
