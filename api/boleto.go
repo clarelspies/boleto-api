@@ -79,16 +79,18 @@ func registerBoleto(c *gin.Context) {
 			p := queue.NewPublisher(b)
 
 			if !queue.WriteMessage(p) {
-				err = redis.SetBoletoJSON(b, resp.ID, boView.PublicKey, lg)
+				err = redis.SetBoletoJSON(b, resp.ID, boView.PublicKey, lg, true)
 				if checkError(c, err, lg) {
 					return
 				}
 			}
 		}
 
-		bhtml, _ := boleto.HTML(boView, "html")
-		s := minifyString(bhtml, "text/html")
-		redis.SetBoletoHTML(s, resp.ID, boView.PublicKey, lg)
+		b := minifyJSON(boView)
+		err = redis.SetBoletoJSON(b, resp.ID, boView.PublicKey, lg, false)
+		if checkError(c, err, lg) {
+			return
+		}
 	}
 	c.JSON(st, resp)
 	c.Set("boletoResponse", resp)
@@ -106,15 +108,20 @@ func getBoleto(c *gin.Context) {
 	log.IPAddress = c.ClientIP()
 
 	redis := db.CreateRedis()
-	b := redis.GetBoletoHTMLByID(id, pk, log)
+	key := fmt.Sprintf("%s:%s:%s", "boleto:json", id, pk)
+	boView := new(models.BoletoView)
+	var errorRedis error
 
-	if b == "" {
+	*boView, errorRedis = redis.GetBoletoJSONByKey(key, log)
+
+	if errorRedis != nil {
+		var err error
 		mongo, errMongo := db.CreateMongo(log)
 		if checkError(c, errMongo, log) {
 			return
 		}
 
-		boView, err := mongo.GetBoletoByID(id, pk)
+		*boView, err = mongo.GetBoletoByID(id, pk)
 
 		if err != nil && err.Error() == db.NotFoundDoc {
 			e := fmt.Sprintf("%s - %s", err.Error(), c.Request.RequestURI)
@@ -130,10 +137,10 @@ func getBoleto(c *gin.Context) {
 			checkError(c, models.NewInternalServerError("MP500", err.Error()), log)
 			return
 		}
-
-		bhtml, err := boleto.HTML(boView, "html")
-		b = minifyString(bhtml, "text/html")
 	}
+
+	bhtml, _ := boleto.HTML(*boView, "html")
+	b := minifyString(bhtml, "text/html")
 
 	if format == "html" {
 		c.Header("Content-Type", "text/html; charset=utf-8")

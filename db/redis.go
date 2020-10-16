@@ -88,16 +88,28 @@ func (r *Redis) GetBoletoHTMLByID(id string, pk string, lg *log.Log) string {
 }
 
 //SetBoletoJSON Grava um boleto em formato JSON no Redis
-func (r *Redis) SetBoletoJSON(b, mID, pk string, lg *log.Log) error {
-	err := r.openConnection()
+func (r *Redis) SetBoletoJSON(b, mID, pk string, lg *log.Log, isResilience bool) error {
+	var (
+		ret interface{}
+		err error
+		key string
+	)
+
+	err = r.openConnection()
 
 	if err != nil {
 		lg.Warn(err.Error(), fmt.Sprintf("OpenConnection [SetBoletoJSON] - Could not connection to Redis Database "))
 		return err
 	}
 
-	key := fmt.Sprintf("%s:%s:%s", "boleto:json", mID, pk)
-	ret, err := r.conn.Do("SET", key, b)
+	if !isResilience {
+		key = fmt.Sprintf("%s:%s:%s", "boleto:json", mID, pk)
+		ret, err = r.conn.Do("SETEX", key, config.Get().RedisExpirationTime, b)
+	} else {
+		key = fmt.Sprintf("%s:%s:%s", "boleto:recovery:json", mID, pk)
+		ret, err = r.conn.Do("SET", key, b)
+	}
+
 	res := fmt.Sprintf("%s", ret)
 
 	r.closeConnection()
