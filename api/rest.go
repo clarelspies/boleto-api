@@ -1,12 +1,14 @@
 package api
 
 import (
+	"github.com/gin-gonic/gin"
+	"github.com/newrelic/go-agent/v3/integrations/nrgin"
+	"github.com/newrelic/go-agent/v3/newrelic"
 	"net/http"
 	"net/http/httputil"
 
 	"github.com/mundipagg/boleto-api/metrics"
 
-	"github.com/gin-gonic/gin"
 	"github.com/mundipagg/boleto-api/config"
 	"github.com/mundipagg/boleto-api/log"
 	"github.com/mundipagg/boleto-api/models"
@@ -14,10 +16,23 @@ import (
 
 //InstallRestAPI "instala" e sobe o servico de rest
 func InstallRestAPI() {
+
 	gin.SetMode(gin.ReleaseMode)
+
 	router := gin.New()
 	router.Use(gin.Recovery())
 	router.Use(executionController())
+
+	if config.Get().NewRelicEnabled {
+		appNewRelic, _ := newrelic.NewApplication(
+			newrelic.ConfigAppName(config.Get().NewRelicAppName),
+			newrelic.ConfigLicense(config.Get().NewRelicLicence),
+			newrelic.ConfigDistributedTracerEnabled(true),
+		)
+
+		router.Use(nrgin.Middleware(appNewRelic))
+	}
+
 	if config.Get().DevMode && !config.Get().MockMode {
 		router.Use(gin.Logger())
 	}

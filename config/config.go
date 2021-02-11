@@ -2,6 +2,7 @@ package config
 
 import (
 	"os"
+	"strconv"
 	"sync"
 	"sync/atomic"
 )
@@ -86,6 +87,10 @@ type Config struct {
 	OriginRoutingKey                 string
 	TimeToRecoveryWithQueueInSeconds string
 	Heartbeat                        string
+	RetryNumberGetBoleto             int
+	NewRelicAppName                  string
+	NewRelicLicence                  string
+	NewRelicEnabled                  bool
 }
 
 var cnf Config
@@ -129,6 +134,7 @@ func Install(mockMode, devMode, disableLog bool) {
 		MongoURL:                         os.Getenv("MONGODB_URL"),
 		MongoUser:                        os.Getenv("MONGODB_USER"),
 		MongoPassword:                    os.Getenv("MONGODB_PASSWORD"),
+		RetryNumberGetBoleto:             getValueInt(os.Getenv("RETRY_NUMBER_GET_BOLETO")),
 		RedisURL:                         os.Getenv("REDIS_URL"),
 		RedisPassword:                    os.Getenv("REDIS_PASSWORD"),
 		RedisDatabase:                    os.Getenv("REDIS_DATABASE"),
@@ -179,6 +185,9 @@ func Install(mockMode, devMode, disableLog bool) {
 		OriginRoutingKey:                 os.Getenv("ORIGIN_ROUTING_KEY"),
 		TimeToRecoveryWithQueueInSeconds: os.Getenv("TIME_TO_RECOVERY_WITH_QUEUE_IN_SECONDS"),
 		Heartbeat:                        os.Getenv("HEARTBEAT"),
+		NewRelicAppName:                  os.Getenv("NEW_RELIC_APP_NAME"),
+		NewRelicLicence:                  os.Getenv("NEW_RELIC_LICENCE"),
+		NewRelicEnabled:                  os.Getenv("NEW_RELIC_ENABLED") == "true",
 	}
 }
 
@@ -203,4 +212,9 @@ func getHostName() string {
 		return ""
 	}
 	return machineName
+}
+
+func getValueInt(v string) int {
+	t, _ := strconv.Atoi(v)
+	return t
 }

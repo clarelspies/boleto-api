@@ -183,28 +183,15 @@
 			"revisionTime": "2017-01-09T09:34:21Z"
 		},
 		{
-			"checksumSHA1": "2A9CS+GZb04dUhsvs3hzYCQs4ys=",
+			"checksumSHA1": "PxYZ9gxxfb7LuA5KltxWoBcZ8XQ=",
 			"path": "github.com/gin-gonic/gin",
-			"revision": "f1edd2c2d1c0ff06ab0a3e8f3c6a3d58ee4a0a68",
-			"revisionTime": "2017-08-27T09:11:38Z"
+			"revision": "1bdf86b722026fd650fddfef7fe9bd8342b51b7a",
+			"revisionTime": "2021-02-08T15:24:22Z",
+			"tree": true
 		},
 		{
-			"checksumSHA1": "w+SG0Ak9CmOIhY7EnZ446E1Lwf8=",
-			"path": "github.com/gin-gonic/gin/binding",
-			"revision": "f1edd2c2d1c0ff06ab0a3e8f3c6a3d58ee4a0a68",
-			"revisionTime": "2017-08-27T09:11:38Z"
-		},
-		{
-			"checksumSHA1": "+UgLC+h5OGeymvpZEIYnDCFWctA=",
-			"path": "github.com/gin-gonic/gin/json",
-			"revision": "f1edd2c2d1c0ff06ab0a3e8f3c6a3d58ee4a0a68",
-			"revisionTime": "2017-08-27T09:11:38Z"
-		},
-		{
-			"checksumSHA1": "RIjKYEX6N10TrTANjdkUI/R9uJ0=",
-			"path": "github.com/gin-gonic/gin/render",
-			"revision": "f1edd2c2d1c0ff06ab0a3e8f3c6a3d58ee4a0a68",
-			"revisionTime": "2017-08-27T09:11:38Z"
+			"path": "github.com/go-playground/validator/v10",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "v1xQNKTln7CWuv11S3up6FBRZLI=",
@@ -397,6 +384,12 @@
 			"path": "github.com/mundipagg/tracer-splunk-writer/strings",
 			"revision": "3b43d284d261d100550ac1ec5403e8c48b4e1c01",
 			"revisionTime": "2019-11-26T20:52:39Z"
+		},
+		{
+			"checksumSHA1": "IrIODlLch3MNO9DSmfV4E8QIg88=",
+			"path": "github.com/newrelic",
+			"revision": "",
+			"tree": true
 		},
 		{
 			"checksumSHA1": "R3yk3OJzuq4MVfVGX5AhkkYv1ko=",

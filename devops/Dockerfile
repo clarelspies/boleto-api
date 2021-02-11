@@ -72,6 +72,10 @@ ENV SEQ_ENABLED="true"
 ENV SPLUNK_ADDRESS="http://localhost:8088/services/collector"
 ENV SPLUNK_KEY="YourTokenKeyEventCollector"
 ENV WAIT_SECONDS_RETENTATION_LOG="1"
+ENV	NEW_RELIC_APP_NAME="Mundipagg Boleto API - Staging"
+ENV	NEW_RELIC_LICENCE="yourLicence"
+ENV	NEW_RELIC_ENABLED="true"
+
 
 ENTRYPOINT ["/home/mundipagg/boleto-api"]
 EXPOSE 3000
